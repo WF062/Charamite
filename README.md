@@ -59,4 +59,5 @@
 ・ウェブサイトの土台がすでに用意されていて、ユーザーがある程度カスタマイズできるように実装したいので、まずは今までのカリキュラムを辿り、掲示板サイトを作成してから、細かい部分を変えて作成していこうと思っています。
 
 
-
+【ER図リンク】
+https://lucid.app/lucidchart/aee676d4-7bff-4b60-95e0-65729bcf0a66/edit?beaconFlowId=346A4CA36A3687FD&invitationId=inv_54dc736d-2a36-47d7-886b-aaf00b4fe6e0&page=0_0
