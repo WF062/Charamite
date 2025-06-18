@@ -10,19 +10,20 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - 3307:3306
+
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     tty: true
     stdin_open: true
     volumes:
-      - .:/v3_advanced_rails:delegated
+      - .:/Charamite:delegated
       - bundle_data:/usr/local/bundle:cached
-      - node_modules:/app/node_modules:cached
-      - /app/vendor
-      - /app/tmp
-      - /app/log
-      - /app/.git
+      # - node_modules:/Charamite/node_modules:cached ← ⚠️ 削除
+      - ./vendor:/Charamite/vendor
+      - ./tmp:/Charamite/tmp
+      - ./log:/Charamite/log
+      - ./.git:/Charamite/.git
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
@@ -31,12 +32,15 @@ services:
     depends_on:
       - db
       - chrome
+
   chrome:
     image: seleniarm/standalone-chromium:latest
     shm_size: 512m
     ports:
       - 4444:4444
+
 volumes:
   mysql_data:
   bundle_data:
-  node_modules:
+  # node_modules: ← ⚠️ 削除してもOK（未使用のため）
+  

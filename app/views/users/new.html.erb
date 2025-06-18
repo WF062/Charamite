@@ -1,0 +1,27 @@
+<div class="w-full max-w-xl mx-auto mt-20 px-6 py-10 bg-white rounded-lg">
+  <h1 class="text-4xl font-bold text-center mb-8">アカウント新規作成</h1>
+
+  <%= form_with model: @user, url: users_path, local: true do |f| %>
+    <div class="mb-6">
+      <%= f.label :name, "ユーザー名", class: "block text-sm font-semibold mb-1" %>
+      <%= f.text_field :name, class: "w-full px-4 py-2 rounded bg-gradient-to-r from-purple-400 to-blue-400 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :email, "メールアドレス", class: "block text-sm font-semibold mb-1" %>
+      <%= f.email_field :email, class: "w-full px-4 py-2 rounded bg-gradient-to-r from-purple-400 to-blue-400 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :password, "パスワード", class: "block text-sm font-semibold mb-1" %>
+      <%= f.password_field :password, class: "w-full px-4 py-2 rounded bg-gradient-to-r from-purple-400 to-blue-400 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+    </div>
+
+    <div class="mb-8">
+      <%= f.label :password_confirmation, "パスワード確認", class: "block text-sm font-semibold mb-1" %>
+      <%= f.password_field :password_confirmation, class: "w-full px-4 py-2 rounded bg-gradient-to-r from-purple-400 to-blue-400 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-purple-500" %>
+    </div>
+
+    <%= f.submit "登録する", class: "w-full border border-black text-black font-bold py-3 rounded-full hover:bg-black hover:text-white transition-colors duration-300" %>
+  <% end %>
+</div>

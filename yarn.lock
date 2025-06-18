@@ -8,5 +8,14 @@ __metadata:
 "Charamite@workspace:.":
   version: 0.0.0-use.local
   resolution: "Charamite@workspace:."
+  dependencies:
+    tailwindcss: "npm:^4.1.10"
   languageName: unknown
   linkType: soft
+
+"tailwindcss@npm:^4.1.10":
+  version: 4.1.10
+  resolution: "tailwindcss@npm:4.1.10"
+  checksum: 10c0/9da74ee1f25d6065150f132a3eb18caad82cd9902b7c552278eb627266c68b12990a22bb4b6169d04ce775c058a8d2638a5051be905be99961889c572e2aeab8
+  languageName: node
+  linkType: hard

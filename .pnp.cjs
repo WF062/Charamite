@@ -28,7 +28,8 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["Charamite", "workspace:."]\
+          ["Charamite", "workspace:."],\
+          ["tailwindcss", "npm:4.1.10"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -37,9 +38,19 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["Charamite", "workspace:."]\
+          ["Charamite", "workspace:."],\
+          ["tailwindcss", "npm:4.1.10"]\
         ],\
         "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["tailwindcss", [\
+      ["npm:4.1.10", {\
+        "packageLocation": "../root/.yarn/berry/cache/tailwindcss-npm-4.1.10-6a4079edf9-10c0.zip/node_modules/tailwindcss/",\
+        "packageDependencies": [\
+          ["tailwindcss", "npm:4.1.10"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]]\
   ]\

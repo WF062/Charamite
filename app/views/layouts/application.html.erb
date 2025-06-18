@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>Charamite</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="min-h-screen flex flex-col">
+
+    <!-- ヘッダー：上部に固定されず通常配置 -->
+    <header class="bg-gradient-to-r from-cyan-300 to-purple-300 w-full">
+      <%= render "shared/header" %>
+    </header>
+
+    <!-- メイン：中央に白背景の内容 -->
+    <main class="flex-grow bg-white flex items-center justify-center px-4 py-10">
+      <div class="w-full max-w-xl">
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- フッター：下部に配置 -->
+    <footer class="bg-gradient-to-r from-cyan-300 to-purple-300 w-full">
+      <%= render "shared/footer" %>
+    </footer>
+
   </body>
 </html>
