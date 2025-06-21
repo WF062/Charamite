@@ -1,0 +1,53 @@
+<main class="w-full h-[calc(100vh-80px-48px)] bg-white px-8 py-6 overflow-y-auto" x-data="{ imageUrl: null, bgColor: '#ffffff' }">
+  <div class="w-full h-full flex gap-12">
+    <!-- 左側：テキストフォーム -->
+    <div class="flex-1 space-y-4">
+      <div>
+        <label class="font-semibold block mb-1">名前</label>
+        <input type="text" placeholder="キャラクター名" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="font-semibold block mb-1">説明</label>
+        <textarea placeholder="キャラクターの説明" class="w-full border rounded px-3 py-2 h-32"></textarea>
+      </div>
+      <div>
+        <label class="font-semibold block mb-1">タグ（カンマ区切り）</label>
+        <input type="text" placeholder="例：雰囲気,シリーズ名" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="font-semibold block mb-1">背景カラー</label>
+        <input type="color" x-model="bgColor" class="w-16 h-10 p-1 border rounded" />
+      </div>
+      <div>
+        <label class="font-semibold block mb-1">キャラクター画像アップロード</label>
+        <label class="cursor-pointer border border-gray-300 px-6 py-2 rounded bg-white hover:bg-gray-100 shadow inline-flex items-center justify-center">
+          <span>ファイルを選択</span>
+          <input type="file"
+                 accept="image/*"
+                 class="hidden"
+                 @change="const file = $event.target.files[0]; if (file) { imageUrl = URL.createObjectURL(file) }"
+          />
+        </label>
+      </div>
+    </div>
+
+    <!-- 右側：画像 + ボタン -->
+    <div class="flex-1 flex flex-col items-center justify-between">
+      <!-- プレビュー枠 -->
+      <template x-if="imageUrl">
+        <div 
+          class="w-[340px] h-[600px] border rounded flex items-center justify-center"
+          :style="`background-color: ${bgColor}`"
+        >
+          <img :src="imageUrl" alt="プレビュー画像" class="h-full object-contain" />
+        </div>
+      </template>
+
+      <!-- 公開・非公開ボタン -->
+      <div class="mt-8 mb-2 flex space-x-4">
+        <button class="border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100">非公開</button>
+        <button class="border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100">公開</button>
+      </div>
+    </div>
+  </div>
+</main>

@@ -33,4 +33,6 @@ Rails.application.routes.draw do
 
   # キャラ作成
   resources :characters, only: [:new]
+
+  resources :posts, only: [:new, :create, :show]
 end
