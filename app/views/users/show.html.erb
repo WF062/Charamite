@@ -14,9 +14,20 @@ end %>
      }'>
 
   <!-- ユーザー名のページ表示 -->
-  <div class="absolute top-24 left-6">
-    <h2 class="text-xl font-bold text-gray-900"><%= @user.name %>のページ</h2>
-    <p class="text-gray-600 text-sm"><%= @user.bio.presence || "挨拶一言" %></p>
+  <div class="absolute top-24 left-6 flex items-center gap-3">
+    <!-- ユーザーアイコン -->
+    <% if @user.icon.attached? %>
+      <%= image_tag @user.icon, class: "w-10 h-10 object-cover rounded-full border" %>
+    <% else %>
+      <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">
+        なし
+      </div>
+    <% end %>
+
+    <div>
+      <h2 class="text-xl font-bold text-gray-900"><%= @user.name %>のページ</h2>
+      <p class="text-gray-600 text-sm"><%= @user.bio.presence || "挨拶一言" %></p>
+    </div>
   </div>
 
   <!-- キャラクター表示エリア -->

@@ -1,0 +1,57 @@
+<main class="w-full min-h-[calc(100vh-80px-48px)] bg-white px-6 py-4 overflow-y-auto"
+      x-data="{ iconUrl: '<%= @user.icon.attached? ? url_for(@user.icon) : '' %>' }">
+  <div class="max-w-xl mx-auto space-y-8 pb-24"> <!-- フッター分の余白を追加 -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">ユーザー設定</h1>
+
+    <%= form_with model: @user, local: true, html: { multipart: true } do |f| %>
+      <!-- アイコン画像 -->
+      <div>
+        <label class="font-semibold block mb-1">アイコン画像</label>
+        <label class="cursor-pointer border border-gray-300 px-4 py-2 rounded bg-white hover:bg-gray-100 shadow inline-flex items-center justify-center">
+          <span>ファイルを選択</span>
+          <%= f.file_field :icon, accept: "image/*", class: "hidden", "@change": "const file = $event.target.files[0]; if (file) { iconUrl = URL.createObjectURL(file) }" %>
+        </label>
+        <div class="mt-4">
+          <template x-if="iconUrl">
+            <img :src="iconUrl" alt="アイコンプレビュー" class="w-24 h-24 object-cover rounded-full border" />
+          </template>
+          <template x-if="!iconUrl">
+            <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">
+              プレビューなし
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <!-- ユーザー名 -->
+      <div>
+        <label class="font-semibold block mb-1 mt-6">ユーザー名</label>
+        <%= f.text_field :name, placeholder: "例：風花", class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <!-- コメント -->
+      <div>
+        <label class="font-semibold block mb-1 mt-6">コメント（20字以内）</label>
+        <%= f.text_field :bio, maxlength: 20, placeholder: "例：よろしくお願いします", class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <!-- メールアドレス -->
+      <div>
+        <label class="font-semibold block mb-1 mt-6">メールアドレス</label>
+        <%= f.email_field :email, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <!-- 保存ボタン -->
+      <div class="mt-6">
+        <%= f.submit "設定を保存", class: "px-6 py-2 rounded bg-black text-white hover:opacity-80" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- ✅ フッターに被らないよう bottom-6 を bottom-24 に調整 -->
+  <div class="fixed bottom-24 right-6 z-50">
+    <%= button_to "退会する", user_path(@user), method: :delete,
+          data: { confirm: "本当に退会しますか？この操作は元に戻せません。" },
+          class: "bg-red-600 text-white text-sm px-4 py-2 rounded shadow hover:bg-red-700" %>
+  </div>
+</main>
