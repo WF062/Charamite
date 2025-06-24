@@ -1,4 +1,43 @@
-<div>
-  <h1 class="font-bold text-4xl">Posts#show</h1>
-  <p>Find me in app/views/posts/show.html.erb</p>
-</div>
+<main class="fixed top-20 left-0 right-0 bottom-0 px-8 py-6 flex gap-12"
+      style="background-color: <%= @post.background_color || '#ffffff' %>">
+
+  <!-- 左カラム：キャラ情報 -->
+  <div class="flex-1 flex flex-col items-center mt-8">
+    <div class="text-center">
+      <h2 class="text-5xl font-bold text-black mb-6"><%= @post.name %></h2>
+      <p class="text-black text-lg whitespace-pre-wrap"><%= @post.description %></p>
+    </div>
+
+    <% if @post.tags.present? %>
+      <div class="mt-10 w-full px-4">
+        <h3 class="font-semibold text-black mb-2">タグ</h3>
+        <div class="flex flex-wrap gap-2">
+          <% @post.tags.split(',').each do |tag| %>
+            <span class="px-3 py-1 bg-gray-200 text-sm rounded-full text-black"><%= tag.strip %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 右カラム：キャラ画像＋ボタン -->
+  <div class="flex-1 flex justify-center items-center relative">
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image, class: "h-[600px] object-contain" %>
+    <% else %>
+      <div class="w-[340px] h-[600px] flex items-center justify-center text-gray-400 text-sm bg-white">
+        画像が設定されていません
+      </div>
+    <% end %>
+
+    <!-- 👇 右下ボタン：フッターに被らないよう調整 -->
+    <div class="absolute bottom-20 right-4 flex flex-col items-end gap-1 text-xs z-10">
+      <% if current_user == @post.user %>
+        <%= link_to "編集", edit_post_path(@post),
+              class: "bg-gray-100 border border-gray-300 px-2 py-1 rounded hover:bg-gray-200 shadow-sm text-gray-600" %>
+      <% end %>
+      <%= link_to "作者ページ", user_path(@post.user),
+            class: "bg-gray-100 border border-gray-300 px-2 py-1 rounded hover:bg-gray-200 shadow-sm text-gray-600" %>
+    </div>
+  </div>
+</main>

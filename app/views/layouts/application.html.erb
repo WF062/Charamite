@@ -5,28 +5,30 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <!-- Alpine.js 読み込み -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- ✅ Alpine.js 読み込み -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
 
   <body class="min-h-screen overflow-hidden pt-20 pb-12">
-
-    <!-- ヘッダー：上部に固定されず通常配置 -->
+    
+    <!-- ヘッダー：上部に固定 -->
     <header class="bg-gradient-to-r from-cyan-300 to-purple-300 w-full fixed top-0 left-0 right-0 z-50">
       <%= render "shared/header" %>
     </header>
 
     <!-- メイン：中央に白背景の内容 -->
-<main class="h-[calc(100vh-128px)] bg-white flex items-center justify-center px-4">
-  <div class="w-full">
-    <%= yield %>
-  </div>
-</main>
+    <main class="h-[calc(100vh-128px)] bg-white flex items-center justify-center px-4">
+      <div class="w-full">
+        <%= yield %>
+      </div>
+    </main>
 
-    <!-- フッター：下部に配置 -->
+    <!-- フッター：下部に固定 -->
     <footer class="bg-gradient-to-r from-cyan-300 to-purple-300 w-full fixed bottom-0 left-0 right-0 z-40">
       <%= render "shared/footer" %>
     </footer>

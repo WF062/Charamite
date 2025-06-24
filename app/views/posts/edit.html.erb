@@ -1,5 +1,6 @@
-<main class="w-full h-[calc(100vh-80px-48px)] bg-white px-8 py-6 overflow-y-auto" x-data="{ imageUrl: null, bgColor: '#ffffff' }">
-  <%= form_with model: @post, url: posts_path, method: :post, local: true, html: { multipart: true } do |f| %>
+<main class="w-full h-[calc(100vh-80px-48px)] bg-white px-8 py-6 overflow-y-auto"
+      x-data="{ imageUrl: null, bgColor: '<%= @post.background_color || '#ffffff' %>' }">
+  <%= form_with model: @post, local: true, html: { multipart: true } do |f| %>
     <div class="w-full h-full flex gap-12">
       
       <!-- 左側：テキストフォーム -->
@@ -27,6 +28,21 @@
             <%= f.file_field :image, accept: "image/*", class: "hidden", :"@change" => "const file = $event.target.files[0]; if (file) { imageUrl = URL.createObjectURL(file) }" %>
           </label>
         </div>
+
+        <!-- ✅ 公開・非公開ラジオ -->
+        <div>
+          <label class="font-semibold block mb-1">公開状態</label>
+          <div class="flex gap-4 text-sm text-gray-700">
+            <label>
+              <%= f.radio_button :is_public, true %>
+              公開
+            </label>
+            <label>
+              <%= f.radio_button :is_public, false %>
+              非公開
+            </label>
+          </div>
+        </div>
       </div>
 
       <!-- 右側：画像 + ボタン -->
@@ -34,7 +50,11 @@
         <template x-if="!imageUrl">
           <div class="w-[340px] h-[600px] border rounded flex items-center justify-center text-gray-400 text-sm"
                :style="`background-color: ${bgColor}`">
-            ここに画像が表示されます
+            <% if @post.image.attached? %>
+              <%= image_tag @post.image, class: "h-full object-contain" %>
+            <% else %>
+              ここに画像が表示されます
+            <% end %>
           </div>
         </template>
 
@@ -45,12 +65,14 @@
           </div>
         </template>
 
-        <!-- ✅ submit ボタン -->
-        <div class="mt-8 mb-2 flex space-x-4">
-          <%= f.submit "非公開", name: "visibility", value: "非公開",
-                       class: "border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100" %>
-          <%= f.submit "公開",   name: "visibility", value: "公開",
-                       class: "border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100" %>
+        <!-- ✅ 更新・削除ボタン -->
+        <div class="mt-8 mb-2 flex flex-col items-center gap-4">
+          <%= f.submit "変更を保存", class: "border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100" %>
+
+          <!-- 削除ボタン -->
+          <%= button_to "削除する", post_path(@post), method: :delete,
+                data: { confirm: "本当に削除しますか？" },
+                class: "text-sm text-red-600 border border-red-300 px-4 py-1 rounded hover:bg-red-50" %>
         </div>
       </div>
     </div>

@@ -1,0 +1,35 @@
+<main class="w-full min-h-[calc(100vh-80px-48px)] px-8 py-6 flex gap-12"
+      style="background-color: <%= @character.background_color || '#ffffff' %>">
+
+  <!-- 左カラム：キャラ情報 -->
+  <div class="flex-1 space-y-6">
+    <div>
+      <h2 class="text-3xl font-bold text-black"><%= @character.name %></h2>
+    </div>
+    <div>
+      <p class="text-black whitespace-pre-wrap"><%= @character.description %></p>
+    </div>
+
+    <% if @character.tags.present? %>
+      <div class="mt-8">
+        <h3 class="font-semibold text-black mb-2">タグ</h3>
+        <div class="flex flex-wrap gap-2">
+          <% @character.tags.split(',').each do |tag| %>
+            <span class="px-3 py-1 bg-gray-200 text-sm rounded-full text-black"><%= tag.strip %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 右カラム：キャラ画像 -->
+  <div class="flex-1 flex justify-center items-center">
+    <% if @character.image.attached? %>
+      <%= image_tag @character.image, class: "h-[600px] object-contain" %>
+    <% else %>
+      <div class="w-[340px] h-[600px] flex items-center justify-center text-gray-400 text-sm bg-white">
+        画像が設定されていません
+      </div>
+    <% end %>
+  </div>
+</main>
