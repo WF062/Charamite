@@ -11,6 +11,9 @@ primary_region = "nrt"
 [deploy]
   release_command = "bin/rails db:prepare"
 
+[processes]
+  app = "bundle exec rails s -b 0.0.0.0"
+
 [[services]]
   internal_port = 3000
   protocol = "tcp"
