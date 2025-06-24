@@ -1,5 +1,5 @@
 class CharactersController < ApplicationController
-  before_action :require_login, only: [:new, :create, :show] # Sorceryが使える前提
+  before_action :require_login, only: [:new, :create, :show]
 
   def new
     @character = Character.new
@@ -7,8 +7,8 @@ class CharactersController < ApplicationController
 
   def create
     @character = Character.new(character_params)
-    @character.user = current_user # ← 作成ユーザーを紐づける
-    @character.is_public = params[:visibility] == "公開" # ← 日本語に修正
+    @character.user = current_user 
+    @character.is_public = params[:visibility] == "公開" 
 
     if @character.save
       redirect_to character_path(@character)
@@ -20,7 +20,6 @@ class CharactersController < ApplicationController
   def show
     @character = Character.find(params[:id])
 
-    # 公開されていない場合、自分のキャラ以外なら404にする
     unless @character.is_public || @character.user == current_user
       head :not_found
     end

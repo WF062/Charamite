@@ -1,7 +1,6 @@
 <main class="w-full min-h-[calc(100vh-80px-48px)] px-8 py-6 flex gap-12"
       style="background-color: <%= @character.background_color || '#ffffff' %>">
 
-  <!-- 左カラム：キャラ情報 -->
   <div class="flex-1 space-y-6">
     <div>
       <h2 class="text-3xl font-bold text-black"><%= @character.name %></h2>
@@ -22,7 +21,6 @@
     <% end %>
   </div>
 
-  <!-- 右カラム：キャラ画像 -->
   <div class="flex-1 flex justify-center items-center">
     <% if @character.image.attached? %>
       <%= image_tag @character.image, class: "h-[600px] object-contain" %>

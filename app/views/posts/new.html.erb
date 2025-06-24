@@ -2,7 +2,6 @@
   <%= form_with model: @post, url: posts_path, method: :post, local: true, html: { multipart: true } do |f| %>
     <div class="w-full h-full flex gap-12">
       
-      <!-- 左側：テキストフォーム -->
       <div class="flex-1 space-y-4">
         <div>
           <label class="font-semibold block mb-1">名前</label>
@@ -29,7 +28,6 @@
         </div>
       </div>
 
-      <!-- 右側：画像 + ボタン -->
       <div class="flex-1 flex flex-col items-center justify-between">
         <template x-if="!imageUrl">
           <div class="w-[340px] h-[600px] border rounded flex items-center justify-center text-gray-400 text-sm"
@@ -45,7 +43,6 @@
           </div>
         </template>
 
-        <!-- ✅ submit ボタン -->
         <div class="mt-8 mb-2 flex space-x-4">
           <%= f.submit "非公開", name: "visibility", value: "非公開",
                        class: "border border-black px-6 py-2 rounded-full bg-white hover:bg-gray-100" %>

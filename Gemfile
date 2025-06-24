@@ -15,7 +15,6 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "tailwindcss-rails", "~> 4.2"
 
-# ✅ sorcery を全体に移動（どの環境でも読み込まれる）
 gem "sorcery"
 
 group :development, :test do

@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :bio,
-      :icon # ✅ ここを修正
+      :icon
     )
   end
 end

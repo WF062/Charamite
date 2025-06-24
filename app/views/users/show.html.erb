@@ -13,9 +13,7 @@ end %>
        characters: <%= raw(post_data.to_json) %>
      }'>
 
-  <!-- ユーザー名のページ表示 -->
   <div class="absolute top-24 left-6 flex items-center gap-3">
-    <!-- ユーザーアイコン -->
     <% if @user.icon.attached? %>
       <%= image_tag @user.icon, class: "w-10 h-10 object-cover rounded-full border" %>
     <% else %>
@@ -30,15 +28,12 @@ end %>
     </div>
   </div>
 
-  <!-- キャラクター表示エリア -->
   <div class="flex items-center justify-center h-full relative pt-36">
-    <!-- ← 左ボタン -->
     <button @click="index = (index - 1 + characters.length) % characters.length"
             class="absolute left-0 text-3xl hover:opacity-60">
       &larr;
     </button>
 
-    <!-- キャラ表示 -->
     <div class="flex space-x-8 items-center justify-center w-full max-w-7xl overflow-hidden">
       <template x-for="(char, i) in characters" :key="i">
         <div x-show="(i + characters.length - index) % characters.length <= 2"
@@ -65,7 +60,6 @@ end %>
       </template>
     </div>
 
-    <!-- → 右ボタン -->
     <button @click="index = (index + 1) % characters.length"
             class="absolute right-0 text-3xl hover:opacity-60">
       &rarr;

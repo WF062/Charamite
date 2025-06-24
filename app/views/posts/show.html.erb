@@ -1,7 +1,6 @@
 <main class="fixed top-20 left-0 right-0 bottom-0 px-8 py-6 flex gap-12"
       style="background-color: <%= @post.background_color || '#ffffff' %>">
 
-  <!-- 左カラム：キャラ情報 -->
   <div class="flex-1 flex flex-col items-center mt-8">
     <div class="text-center">
       <h2 class="text-5xl font-bold text-black mb-6"><%= @post.name %></h2>
@@ -20,7 +19,6 @@
     <% end %>
   </div>
 
-  <!-- 右カラム：キャラ画像＋ボタン -->
   <div class="flex-1 flex justify-center items-center relative">
     <% if @post.image.attached? %>
       <%= image_tag @post.image, class: "h-[600px] object-contain" %>
@@ -30,7 +28,6 @@
       </div>
     <% end %>
 
-    <!-- 👇 右下ボタン：フッターに被らないよう調整 -->
     <div class="absolute bottom-20 right-4 flex flex-col items-end gap-1 text-xs z-10">
       <% if current_user == @post.user %>
         <%= link_to "編集", edit_post_path(@post),
