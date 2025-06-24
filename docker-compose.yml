@@ -1,15 +1,17 @@
 version: '3'
 services:
   db:
-    image: mysql:5.7
+    image: postgres:15
     platform: linux/amd64
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: charamite_development
       TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: password
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 3307:3306
+      - 5433:5432
 
   web:
     build: .
@@ -19,7 +21,6 @@ services:
     volumes:
       - .:/Charamite:delegated
       - bundle_data:/usr/local/bundle:cached
-      # - node_modules:/Charamite/node_modules:cached ← ⚠️ 削除
       - ./vendor:/Charamite/vendor
       - ./tmp:/Charamite/tmp
       - ./log:/Charamite/log
@@ -40,7 +41,5 @@ services:
       - 4444:4444
 
 volumes:
-  mysql_data:
+  postgres_data:
   bundle_data:
-  # node_modules: ← ⚠️ 削除してもOK（未使用のため）
-  
