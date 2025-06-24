@@ -1,0 +1,9 @@
+/*
+ *= require_self
+ */
+
+@import "application.tailwind";
+
+[x-cloak] {
+  display: none;
+}
