@@ -1,9 +1,0 @@
-/*
-
- */
-
-@import "application.tailwind";
-
-[x-cloak] {
-  display: none;
-}
