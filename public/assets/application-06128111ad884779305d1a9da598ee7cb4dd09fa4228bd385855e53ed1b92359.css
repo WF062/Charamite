@@ -1,0 +1,16 @@
+/*
+
+ */
+
+@import "application.tailwind";
+
+[x-cloak] {
+  display: none;
+}
+/*
+
+
+ */
+
+/* Tailwind を取り込む */
+@import "application.tailwind";
