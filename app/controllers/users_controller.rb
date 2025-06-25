@@ -7,7 +7,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
+      auto_login(@user)  # Sorceryで自動ログインさせる（任意）
       redirect_to root_path, notice: "アカウントを作成しました"
     else
       render :new, status: :unprocessable_entity
@@ -17,11 +19,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    if current_user == @user
-      @posts = @user.posts.order(:created_at)
-    else
-      @posts = @user.posts.where(is_public: true).order(:created_at)
-    end
+    @posts = if current_user == @user
+               @user.posts.order(:created_at)
+             else
+               @user.posts.where(is_public: true).order(:created_at)
+             end
 
     @post_data = @posts.map do |p|
       {
@@ -54,11 +56,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
+    # Sorceryでは password_confirmation は使わないので削除
     params.require(:user).permit(
       :name,
       :email,
       :password,
-      :password_confirmation,
       :bio,
       :icon
     )
